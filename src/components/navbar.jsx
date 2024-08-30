@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar as BootstrapNavbar, Nav } from 'react-bootstrap';
 
 const Navbar = () => (
-  <BootstrapNavbar  expand="lg" className='navbar-primary bg-primary text-light'>
+  <BootstrapNavbar variant='dark' expand="lg" className=' bg-primary'>
     <BootstrapNavbar.Brand as={Link} to="/">Il tuo meteo</BootstrapNavbar.Brand>
     <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
     <BootstrapNavbar.Collapse id="basic-navbar-nav">
