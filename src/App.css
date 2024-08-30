@@ -3,11 +3,10 @@ footer {
   color: white;
   text-align: center;
   padding: 10px 0;
-  background: linear-gradient(to bottom, #00bfff, #000000);
 }
 
 body {
-  background: linear-gradient(to top, #00bfff, #000000);
+  background: linear-gradient(to bottom, #00bfff, #000000);
   height: 100%;
   margin: 0;
 }
@@ -23,14 +22,4 @@ body {
 }
 main {
   flex-grow: 1;
-}
-html {
-  height: 100%;
-  margin: 0;
-}
-.card{
-  background: linear-gradient(to bottom, #ffff00, #00bfff);
-}
-.navbar {
-  background: linear-gradient(to bottom, #ffff00, #00bfff);
 }
