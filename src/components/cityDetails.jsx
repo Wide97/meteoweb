@@ -8,21 +8,29 @@ const CityDetails = () => {
   const { cityId } = useParams();
   const [city, setCity] = useState(null);
   const [nearbyCities, setNearbyCities] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchCityDetails = async () => {
       try {
         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?id=${cityId}&appid=${API_KEY}&units=metric`);
+        if (!response.ok) {
+          throw new Error('City not found');
+        }
         const data = await response.json();
         setCity(data);
 
         // Fetch nearby cities
         const { lat, lon } = data.coord;
         const nearbyResponse = await fetch(`https://api.openweathermap.org/data/2.5/find?lat=${lat}&lon=${lon}&cnt=5&appid=${API_KEY}`);
+        if (!nearbyResponse.ok) {
+          throw new Error('Nearby cities not found');
+        }
         const nearbyData = await nearbyResponse.json();
         setNearbyCities(nearbyData.list);
       } catch (err) {
         console.error('Error fetching city details:', err);
+        setError(err.message || 'Failed to fetch data');
       }
     };
 
@@ -31,10 +39,17 @@ const CityDetails = () => {
 
   return (
     <Container>
+      {error && (
+        <Row className="justify-content-center mt-4">
+          <Col xs={12} md={8} lg={6}>
+            <p className="text-center text-danger">{error}</p>
+          </Col>
+        </Row>
+      )}
       {city && (
         <Row>
           <Col md={8} lg={6} className="mx-auto">
-            <Card className="mb-4 bg-primary">
+            <Card className=" bg-primary">
               <Card.Body>
                 <Card.Title className='text-light text-center'>{city.name}</Card.Title>
                 <Card.Text className='text-light'>Temperature: {city.main.temp}°C</Card.Text>
@@ -53,16 +68,22 @@ const CityDetails = () => {
 
             <h3 className='text-light text-center my-4'>Città vicine</h3>
             <Row>
-              {nearbyCities.map(neighbor => (
-                <Col xs={12} md={6} lg={4} key={neighbor.id} className="mb-3">
-                  <Card className='bg-primary text-light'>
-                    <Card.Body>
-                      <Card.Title>{neighbor.name}</Card.Title>
-                      <Card.Text>{neighbor.main.temp}°C</Card.Text>
-                    </Card.Body>
-                  </Card>
+              {nearbyCities.length === 0 ? (
+                <Col xs={12} className="text-center">
+                  <p>No nearby cities found</p>
                 </Col>
-              ))}
+              ) : (
+                nearbyCities.map(neighbor => (
+                  <Col xs={12} md={6} lg={4} key={neighbor.id} className="mb-3">
+                    <Card className='bg-primary text-light'>
+                      <Card.Body>
+                        <Card.Title>{neighbor.name}</Card.Title>
+                        <Card.Text>{neighbor.main.temp}°C</Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                ))
+              )}
             </Row>
           </Col>
         </Row>

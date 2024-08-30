@@ -10,12 +10,11 @@ const WeatherCard = ({ city }) => {
   }
 
   const { id, name, main, weather } = city;
-  const weatherDescription =
-    weather[0]?.description || "No description available";
+  const weatherDescription = weather[0]?.description || "No description available";
   const weatherIcon = weather[0]?.icon || "01d";
 
   return (
-    <Card className="weather-card text-center bg-primary text-light">
+    <Card className="weather-card text-center bg-primary text-light mb-4">
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Img
@@ -24,13 +23,13 @@ const WeatherCard = ({ city }) => {
           alt={weatherDescription}
         />
         <Card.Text className="text-center">
-          Temperature: {main.temp}°C
+          Temperature: {main.temp ? `${main.temp}°C` : 'N/A'}
         </Card.Text>
         <Card.Text className="text-center">
           Weather: {weatherDescription}
         </Card.Text>
         <Card.Text className="text-center">
-          Humidity: {main.humidity}%
+          Humidity: {main.humidity ? `${main.humidity}%` : 'N/A'}
         </Card.Text>
         <div className="text-center">
           <Link to={`/city/${id}`} className="btn btn-dark">
