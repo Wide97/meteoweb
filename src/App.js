@@ -4,6 +4,7 @@ import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Home from './pages/home';
 import City from './pages/city';
+import About from './pages/About';
 
 
 const App = () => (
@@ -13,6 +14,7 @@ const App = () => (
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/city/:cityId" element={<City/>} />
+        <Route path="/about" element={<About/>} />
         <Route  />
       </Routes>
     </main>
