@@ -1,20 +1,21 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import Navbar from "./components/navbar";
-import Footer from "./components/footer";
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Navbar from './components/navbar';
+import Footer from './components/footer';
+import Home from './pages/home';
 
-function App() {
-  return (
-    <>
-      <header>
-        <Navbar />
-      </header>
-      <main></main>
-      <footer>
-        <Footer/>
-      </footer>
-    </>
-  );
-}
+
+const App = () => (
+  <div>
+    <Navbar />
+    <main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route  />
+      </Routes>
+    </main>
+    <Footer />
+  </div>
+);
 
 export default App;
