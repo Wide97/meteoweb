@@ -37,7 +37,7 @@ const Home = () => {
     <Container>
       <Row className="justify-content-center">
         <Col xs={12} md={8} lg={6}>
-          <h1 className="text-center mb-4 text-light">Weather Search</h1>
+          <h1 className="text-center my-4 text-light">Cerca una Città</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="formCityName">
               <Form.Control

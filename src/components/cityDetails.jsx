@@ -34,28 +34,28 @@ const CityDetails = () => {
       {city && (
         <Row>
           <Col md={8} lg={6} className="mx-auto">
-            <Card className="mb-4">
+            <Card className="mb-4 bg-primary">
               <Card.Body>
-                <Card.Title>{city.name}</Card.Title>
-                <Card.Text>Temperature: {city.main.temp}°C</Card.Text>
-                <Card.Text>Feels Like: {city.main.feels_like}°C</Card.Text>
-                <Card.Text>Weather: {city.weather[0].description}</Card.Text>
-                <Card.Text>Humidity: {city.main.humidity}%</Card.Text>
-                <Card.Text>Pressure: {city.main.pressure} hPa</Card.Text>
-                <Card.Text>Wind Speed: {city.wind.speed} m/s</Card.Text>
-                <Card.Text>Visibility: {city.visibility / 1000} km</Card.Text>
-                <Card.Text>Rain (last hour): {city.rain ? city.rain['1h'] : 0} mm</Card.Text>
-                <Card.Text>Cloudiness: {city.clouds.all}%</Card.Text>
-                <Card.Text>Sunrise: {new Date(city.sys.sunrise * 1000).toLocaleTimeString()}</Card.Text>
-                <Card.Text>Sunset: {new Date(city.sys.sunset * 1000).toLocaleTimeString()}</Card.Text>
+                <Card.Title className='text-light text-center'>{city.name}</Card.Title>
+                <Card.Text className='text-light'>Temperature: {city.main.temp}°C</Card.Text>
+                <Card.Text className='text-light'>Feels Like: {city.main.feels_like}°C</Card.Text>
+                <Card.Text className='text-light'>Weather: {city.weather[0].description}</Card.Text>
+                <Card.Text className='text-light'>Humidity: {city.main.humidity}%</Card.Text>
+                <Card.Text className='text-light'>Pressure: {city.main.pressure} hPa</Card.Text>
+                <Card.Text className='text-light'>Wind Speed: {city.wind.speed} m/s</Card.Text>
+                <Card.Text className='text-light'>Visibility: {city.visibility / 1000} km</Card.Text>
+                <Card.Text className='text-light'>Rain (last hour): {city.rain ? city.rain['1h'] : 0} mm</Card.Text>
+                <Card.Text className='text-light'>Cloudiness: {city.clouds.all}%</Card.Text>
+                <Card.Text className='text-light'>Sunrise: {new Date(city.sys.sunrise * 1000).toLocaleTimeString()}</Card.Text>
+                <Card.Text className='text-light'>Sunset: {new Date(city.sys.sunset * 1000).toLocaleTimeString()}</Card.Text>
               </Card.Body>
             </Card>
 
-            <h3>Nearby Cities</h3>
+            <h3 className='text-light text-center my-4'>Città vicine</h3>
             <Row>
               {nearbyCities.map(neighbor => (
                 <Col xs={12} md={6} lg={4} key={neighbor.id} className="mb-3">
-                  <Card>
+                  <Card className='bg-primary text-light'>
                     <Card.Body>
                       <Card.Title>{neighbor.name}</Card.Title>
                       <Card.Text>{neighbor.main.temp}°C</Card.Text>

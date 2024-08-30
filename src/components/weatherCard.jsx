@@ -15,7 +15,7 @@ const WeatherCard = ({ city }) => {
   const weatherIcon = weather[0]?.icon || "01d";
 
   return (
-    <Card className="weather-card text-center">
+    <Card className="weather-card text-center bg-primary text-light">
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Img
@@ -33,7 +33,7 @@ const WeatherCard = ({ city }) => {
           Humidity: {main.humidity}%
         </Card.Text>
         <div className="text-center">
-          <Link to={`/city/${id}`} className="btn btn-primary">
+          <Link to={`/city/${id}`} className="btn btn-dark">
             View Details
           </Link>
         </div>
