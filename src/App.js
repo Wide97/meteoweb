@@ -8,9 +8,9 @@ import About from './pages/About';
 
 
 const App = () => (
-  <div>
+  <div className="app-container">
     <Navbar />
-    <main>
+    <main className="flex-grow-1">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/city/:cityId" element={<City/>} />
