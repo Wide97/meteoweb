@@ -5,12 +5,16 @@ import { Card } from 'react-bootstrap';
 const WEATHER_ICON_URL = "http://openweathermap.org/img/wn/";
 
 const WeatherCard = ({ city }) => {
+  if (!city || !city.weather || !city.weather[0]) {
+    return <p className="text-center">No data available</p>;
+  }
+
   const { id, name, main, weather } = city;
-  const weatherDescription = weather[0].description;
-  const weatherIcon = weather[0].icon;
+  const weatherDescription = weather[0]?.description || 'No description available';
+  const weatherIcon = weather[0]?.icon || '01d'; 
 
   return (
-    <Card className="mb-4">
+    <Card className="weather-card">
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Img variant="top" src={`${WEATHER_ICON_URL}${weatherIcon}@2x.png`} alt={weatherDescription} />

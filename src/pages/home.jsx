@@ -7,15 +7,24 @@ const API_KEY = '846bfed234f30d30edd873d54e959d12';
 const Home = () => {
   const [cityName, setCityName] = useState('');
   const [city, setCity] = useState(null);
+  const [error, setError] = useState(null);
 
   const fetchWeather = async () => {
     try {
       const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`);
       const data = await response.json();
-      setCity(data);
+
+      if (data.cod === 200) {
+        setCity(data);
+        setError(null);
+      } else {
+        setCity(null);
+        setError(data.message || 'City not found');
+      }
     } catch (err) {
       console.error('Error fetching weather data:', err);
       setCity(null);
+      setError('Failed to fetch weather data');
     }
   };
 
@@ -38,13 +47,22 @@ const Home = () => {
                 onChange={(e) => setCityName(e.target.value)}
               />
             </Form.Group>
-            <Button variant="primary" type="submit" className="mt-2">Search</Button>
+            <div className="text-center mt-2">
+              <Button variant="primary" type="submit">Search</Button>
+            </div>
           </Form>
         </Col>
       </Row>
-      {city && (
+      {error && (
         <Row className="justify-content-center mt-4">
           <Col xs={12} md={8} lg={6}>
+            <p className="text-center text-danger">{error}</p>
+          </Col>
+        </Row>
+      )}
+      {city && !error && (
+        <Row className="justify-content-center mt-4">
+          <Col xs={12} sm={8} md={6} lg={4}>
             <WeatherCard city={city} />
           </Col>
         </Row>
