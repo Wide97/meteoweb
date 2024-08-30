@@ -15,7 +15,7 @@ const WeatherCard = ({ city }) => {
   const weatherIcon = weather[0]?.icon || "01d";
 
   return (
-    <Card className="weather-card">
+    <Card className="weather-card text-center">
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Img

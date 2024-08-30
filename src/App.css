@@ -7,3 +7,7 @@ footer {
 body {
   background-color: #212529;
 }
+.weather-card {
+  width: 70%;
+  margin-left: 15%;
+}
