@@ -27,7 +27,16 @@ const CityDetails = () => {
           throw new Error('Nearby cities not found');
         }
         const nearbyData = await nearbyResponse.json();
-        setNearbyCities(nearbyData.list);
+
+        const convertedNearbyCities = nearbyData.list.map(neighbor => ({
+          ...neighbor,
+          main: {
+            ...neighbor.main,
+            temp: neighbor.main.temp - 273.15  
+          }
+        }));
+
+        setNearbyCities(convertedNearbyCities);
       } catch (err) {
         console.error('Error fetching city details:', err);
         setError(err.message || 'Failed to fetch data');
@@ -49,7 +58,7 @@ const CityDetails = () => {
       {city && (
         <Row>
           <Col md={8} lg={6} className="mx-auto">
-            <Card className=" bg-primary">
+            <Card className="bg-primary">
               <Card.Body>
                 <Card.Title className='text-light text-center'>{city.name}</Card.Title>
                 <Card.Text className='text-light'>Temperature: {city.main.temp}°C</Card.Text>
@@ -78,7 +87,7 @@ const CityDetails = () => {
                     <Card className='bg-primary text-light'>
                       <Card.Body>
                         <Card.Title>{neighbor.name}</Card.Title>
-                        <Card.Text>{neighbor.main.temp}°C</Card.Text>
+                        <Card.Text>{neighbor.main.temp.toFixed(1)}°C</Card.Text>
                       </Card.Body>
                     </Card>
                   </Col>
